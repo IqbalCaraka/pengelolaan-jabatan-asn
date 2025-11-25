@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Pengelolaan Jabatan ASN - BKN</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="jabatan-detail.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>BKN Admin</h2>
+                <p>Pengelolaan Jabatan ASN</p>
+            </div>
+            <nav class="nav-menu">
+                <a href="dashboard.html" class="nav-item active">
+                    <span class="icon">📊</span>
+                    Dashboard
+                </a>
+                <a href="jabatan.html" class="nav-item">
+                    <span class="icon">💼</span>
+                    Jabatan
+                </a>
+                <a href="ujian-kompetensi.html" class="nav-item">
+                    <span class="icon">📝</span>
+                    Ujian Kompetensi
+                </a>
+                <a href="asn.html" class="nav-item">
+                    <span class="icon">👥</span>
+                    ASN
+                </a>
+                <a href="laporan.html" class="nav-item">
+                    <span class="icon">📈</span>
+                    Laporan
+                </a>
+                <a href="pengaturan.html" class="nav-item">
+                    <span class="icon">⚙️</span>
+                    Pengaturan
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <h1>Dashboard Pengelolaan Jabatan ASN</h1>
+                <div class="user-info">
+                    <span>Admin BKN</span>
+                    <div class="avatar">A</div>
+                </div>
+            </header>
+
+            <!-- Dashboard Cards -->
+            <section class="dashboard-cards-new">
+                <!-- Combined Jabatan Card -->
+                <div class="card-combined" onclick="window.location.href='jabatan-detail.html'" style="cursor: pointer;">
+                    <div class="card-combined-header">
+                        <div class="card-combined-title">
+                            <span class="icon-large">💼</span>
+                            <div>
+                                <h2>Ringkasan Jabatan ASN</h2>
+                                <p>Status kebutuhan dan ketersediaan jabatan</p>
+                            </div>
+                        </div>
+                        <div class="card-link">Lihat Detail →</div>
+                    </div>
+                    <div class="card-combined-stats">
+                        <div class="stat-item stat-primary">
+                            <div class="stat-icon">📋</div>
+                            <div class="stat-content">
+                                <span class="stat-label">Total Dibutuhkan</span>
+                                <span class="stat-number" id="totalJabatan">0</span>
+                            </div>
+                        </div>
+                        <div class="stat-item stat-success">
+                            <div class="stat-icon">✅</div>
+                            <div class="stat-content">
+                                <span class="stat-label">Jabatan Terisi</span>
+                                <span class="stat-number" id="jabatanTerisi">0</span>
+                            </div>
+                        </div>
+                        <div class="stat-item stat-warning">
+                            <div class="stat-icon">⚠️</div>
+                            <div class="stat-content">
+                                <span class="stat-label">Jabatan Kosong</span>
+                                <span class="stat-number" id="jabatanKosong">0</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-combined-footer">
+                        <div class="progress-bar-combined">
+                            <div class="progress-fill-combined progress-terisi" id="progressTerisi"></div>
+                        </div>
+                        <div class="progress-info">
+                            <span id="persenTerisi">0%</span> Terisi
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pengajuan Ujian Card -->
+                <div class="card card-info" onclick="window.location.href='ujian-kompetensi.html'" style="cursor: pointer;">
+                    <div class="card-icon">📝</div>
+                    <div class="card-content">
+                        <h3>Pengajuan Ujian Kompetensi</h3>
+                        <p class="card-number" id="totalPengajuan">0</p>
+                        <span class="card-subtitle">Total pengajuan masuk • <strong>Lihat Detail →</strong></span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Progress Section -->
+            <section class="progress-section">
+                <div class="section-card">
+                    <h2>Progress Pengajuan Ujian Kompetensi</h2>
+                    <div class="progress-container">
+                        <div class="progress-item">
+                            <div class="progress-label">
+                                <span>Pendaftaran</span>
+                                <span id="progPendaftaran">0</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="barPendaftaran"></div>
+                            </div>
+                        </div>
+                        <div class="progress-item">
+                            <div class="progress-label">
+                                <span>Verifikasi Dokumen</span>
+                                <span id="progVerifikasi">0</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="barVerifikasi"></div>
+                            </div>
+                        </div>
+                        <div class="progress-item">
+                            <div class="progress-label">
+                                <span>Sedang Ujian</span>
+                                <span id="progUjian">0</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="barUjian"></div>
+                            </div>
+                        </div>
+                        <div class="progress-item">
+                            <div class="progress-label">
+                                <span>Penilaian</span>
+                                <span id="progPenilaian">0</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="barPenilaian"></div>
+                            </div>
+                        </div>
+                        <div class="progress-item">
+                            <div class="progress-label">
+                                <span>Selesai</span>
+                                <span id="progSelesai">0</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="barSelesai"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section-new">
+                <div class="result-card-combined">
+                    <div class="result-card-header">
+                        <h2>📊 Hasil Ujian Kompetensi</h2>
+                        <p>Statistik kelulusan peserta ujian</p>
+                    </div>
+
+                    <div class="result-stats-container">
+                        <div class="result-stat-item result-stat-success">
+                            <div class="result-stat-icon">🎓</div>
+                            <div class="result-stat-content">
+                                <span class="result-stat-label">Lulus</span>
+                                <div class="result-stat-numbers">
+                                    <span class="result-stat-number" id="jumlahLulus">0</span>
+                                    <span class="result-stat-total">peserta</span>
+                                </div>
+                                <div class="result-progress-mini">
+                                    <div class="result-progress-fill result-progress-success" id="progressLulus"></div>
+                                </div>
+                                <span class="result-stat-percent" id="persenLulus">0%</span>
+                            </div>
+                        </div>
+
+                        <div class="result-divider">
+                            <div class="result-vs">VS</div>
+                        </div>
+
+                        <div class="result-stat-item result-stat-danger">
+                            <div class="result-stat-icon">❌</div>
+                            <div class="result-stat-content">
+                                <span class="result-stat-label">Tidak Lulus</span>
+                                <div class="result-stat-numbers">
+                                    <span class="result-stat-number" id="jumlahTidakLulus">0</span>
+                                    <span class="result-stat-total">peserta</span>
+                                </div>
+                                <div class="result-progress-mini">
+                                    <div class="result-progress-fill result-progress-danger" id="progressTidakLulus"></div>
+                                </div>
+                                <span class="result-stat-percent" id="persenTidakLulus">0%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="result-card-footer">
+                        <div class="result-summary">
+                            <span class="result-summary-icon">👥</span>
+                            <span>Total <strong id="totalPesertaUjian">123</strong> peserta telah menyelesaikan ujian</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Charts Section Row 1 -->
+            <section class="charts-section" style="grid-template-columns: 1fr 1fr;">
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h2>🏢 Top Unit Pengaju</h2>
+                        <p style="font-size: 13px; color: #7f8c8d; margin-top: 5px;">Unit kerja dengan pengajuan terbanyak</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="unitChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h2>💼 Top Jabatan Diminati</h2>
+                        <p style="font-size: 13px; color: #7f8c8d; margin-top: 5px;">Jabatan dengan lamaran terbanyak</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="jabatanTopChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Charts Section Row 2 -->
+            <section class="charts-section" style="grid-template-columns: 1fr 1fr;">
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h2>📋 Jenis Ujian</h2>
+                        <p style="font-size: 13px; color: #7f8c8d; margin-top: 5px;">Perbandingan PJ (Promosi Jabatan) vs KJ (Kenaikan Jenjang)</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="jenisUjianChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h2>🎯 Top 10 Jabatan</h2>
+                        <p style="font-size: 13px; color: #7f8c8d; margin-top: 5px;">Ranking jabatan berdasarkan total pengajuan</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="top10JabatanChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Timeline Chart Full Width -->
+            <section class="charts-section" style="grid-template-columns: 1fr;">
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h2>📅 Timeline Pengajuan Bulanan</h2>
+                        <p style="font-size: 13px; color: #7f8c8d; margin-top: 5px;">Tren jumlah pengajuan ujian kompetensi per bulan</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="timelineChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recent Activity -->
+            <section class="activity-section">
+                <div class="section-card">
+                    <h2>Aktivitas Terbaru</h2>
+                    <div class="activity-list" id="activityList">
+                        <!-- Activity items will be added by JavaScript -->
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

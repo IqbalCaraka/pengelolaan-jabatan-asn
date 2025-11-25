@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir \"c:\\laragon\\www\\pengelolaan-jabatan-bkn\")",
+      "Bash(move \"c:\\laragon\\www\\pengelolaan-jabatan-bkn\\index.html\" \"c:\\laragon\\www\\pengelolaan-jabatan-bkn\\public\\dashboard.html\")",
+      "Bash(dir:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

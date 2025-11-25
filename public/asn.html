@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data ASN - Admin BKN</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="jabatan.css">
+    <link rel="stylesheet" href="jabatan-detail.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>BKN Admin</h2>
+                <p>Pengelolaan Jabatan ASN</p>
+            </div>
+            <nav class="nav-menu">
+                <a href="dashboard.html" class="nav-item">
+                    <span class="icon">📊</span>
+                    Dashboard
+                </a>
+                <a href="jabatan.html" class="nav-item">
+                    <span class="icon">💼</span>
+                    Jabatan
+                </a>
+                <a href="ujian-kompetensi.html" class="nav-item">
+                    <span class="icon">📝</span>
+                    Ujian Kompetensi
+                </a>
+                <a href="asn.html" class="nav-item active">
+                    <span class="icon">👥</span>
+                    ASN
+                </a>
+                <a href="laporan.html" class="nav-item">
+                    <span class="icon">📈</span>
+                    Laporan
+                </a>
+                <a href="pengaturan.html" class="nav-item">
+                    <span class="icon">⚙️</span>
+                    Pengaturan
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="header">
+                <div>
+                    <h1>Data ASN</h1>
+                    <p class="breadcrumb">Dashboard > ASN</p>
+                </div>
+                <div class="user-info">
+                    <span>Admin BKN</span>
+                    <div class="avatar">A</div>
+                </div>
+            </header>
+
+            <section class="action-bar">
+                <button class="btn-primary" onclick="alert('Fitur Tambah ASN akan segera hadir!')">
+                    <span class="btn-icon">➕</span>
+                    Tambah ASN Baru
+                </button>
+                <div class="action-group">
+                    <button class="btn-secondary" onclick="alert('Export Excel')">
+                        <span class="btn-icon">📥</span>
+                        Export Excel
+                    </button>
+                    <button class="btn-secondary" onclick="alert('Import Excel')">
+                        <span class="btn-icon">📤</span>
+                        Import Excel
+                    </button>
+                </div>
+            </section>
+
+            <section class="summary-section">
+                <div class="summary-card-mini">
+                    <div class="summary-card-mini-icon" style="background: rgba(52, 152, 219, 0.1); color: #3498db;">👥</div>
+                    <div>
+                        <h3>Total ASN</h3>
+                        <p class="summary-number-mini">1,247</p>
+                    </div>
+                </div>
+                <div class="summary-card-mini">
+                    <div class="summary-card-mini-icon" style="background: rgba(46, 204, 113, 0.1); color: #27ae60;">✅</div>
+                    <div>
+                        <h3>ASN Aktif</h3>
+                        <p class="summary-number-mini">1,189</p>
+                    </div>
+                </div>
+                <div class="summary-card-mini">
+                    <div class="summary-card-mini-icon" style="background: rgba(241, 196, 15, 0.1); color: #f39c12;">⏸️</div>
+                    <div>
+                        <h3>Cuti/Non-Aktif</h3>
+                        <p class="summary-number-mini">58</p>
+                    </div>
+                </div>
+                <div class="summary-card-mini">
+                    <div class="summary-card-mini-icon" style="background: rgba(155, 89, 182, 0.1); color: #9b59b6;">🎓</div>
+                    <div>
+                        <h3>Dalam Pelatihan</h3>
+                        <p class="summary-number-mini">42</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="filter-search-section">
+                <div class="filter-search-card">
+                    <div class="search-box">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" id="searchASN" placeholder="Cari nama, NIP, atau jabatan..." class="search-input-main">
+                    </div>
+                    <div class="filter-group-inline">
+                        <select class="filter-select">
+                            <option value="all">Semua Golongan</option>
+                            <option value="I">Golongan I</option>
+                            <option value="II">Golongan II</option>
+                            <option value="III">Golongan III</option>
+                            <option value="IV">Golongan IV</option>
+                        </select>
+                        <select class="filter-select">
+                            <option value="all">Semua Status</option>
+                            <option value="aktif">Aktif</option>
+                            <option value="cuti">Cuti</option>
+                            <option value="pelatihan">Pelatihan</option>
+                        </select>
+                        <button class="btn-filter-reset">Reset Filter</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="jabatan-list-section">
+                <div class="section-header">
+                    <h2>Daftar ASN</h2>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Foto</th>
+                                <th>Nama</th>
+                                <th>NIP</th>
+                                <th>Jabatan</th>
+                                <th>Golongan</th>
+                                <th>Unit Kerja</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td><div class="avatar" style="width: 32px; height: 32px; font-size: 12px;">AR</div></td>
+                                <td><strong>Ahmad Rizki Ramadhan</strong></td>
+                                <td>199001152015031001</td>
+                                <td>Pranata Komputer</td>
+                                <td>III/c</td>
+                                <td>BKN Pusat</td>
+                                <td><span class="status-badge status-normal">Aktif</span></td>
+                                <td><button class="btn-action" onclick="alert('Detail ASN')">Detail</button></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td><div class="avatar" style="width: 32px; height: 32px; font-size: 12px; background: #e74c3c;">SN</div></td>
+                                <td><strong>Siti Nurhaliza</strong></td>
+                                <td>199205102016042002</td>
+                                <td>Analis SDM Aparatur</td>
+                                <td>III/b</td>
+                                <td>BKN Regional</td>
+                                <td><span class="status-badge status-normal">Aktif</span></td>
+                                <td><button class="btn-action" onclick="alert('Detail ASN')">Detail</button></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td><div class="avatar" style="width: 32px; height: 32px; font-size: 12px; background: #27ae60;">BS</div></td>
+                                <td><strong>Budi Santoso</strong></td>
+                                <td>198812202014031003</td>
+                                <td>Kepala Bidang Mutasi</td>
+                                <td>IV/a</td>
+                                <td>BKN Pusat</td>
+                                <td><span class="status-badge status-normal">Aktif</span></td>
+                                <td><button class="btn-action" onclick="alert('Detail ASN')">Detail</button></td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td><div class="avatar" style="width: 32px; height: 32px; font-size: 12px; background: #f39c12;">DK</div></td>
+                                <td><strong>Dewi Kartika Sari</strong></td>
+                                <td>199103152015042001</td>
+                                <td>Analis Kebijakan</td>
+                                <td>III/c</td>
+                                <td>BKN Pusat</td>
+                                <td><span class="status-badge status-purple">Pelatihan</span></td>
+                                <td><button class="btn-action" onclick="alert('Detail ASN')">Detail</button></td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td><div class="avatar" style="width: 32px; height: 32px; font-size: 12px; background: #9b59b6;">EP</div></td>
+                                <td><strong>Eko Prasetyo</strong></td>
+                                <td>198907252013031002</td>
+                                <td>Auditor</td>
+                                <td>III/d</td>
+                                <td>BKN Regional</td>
+                                <td><span class="status-badge status-normal">Aktif</span></td>
+                                <td><button class="btn-action" onclick="alert('Detail ASN')">Detail</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="pagination-section">
+                    <div class="pagination-info">
+                        Menampilkan 1-5 dari 1,247 ASN
+                    </div>
+                    <div class="pagination-controls">
+                        <button class="btn-page">← Sebelumnya</button>
+                        <div class="page-numbers">
+                            <div class="page-num active">1</div>
+                            <div class="page-num">2</div>
+                            <div class="page-num">3</div>
+                            <div class="page-num">...</div>
+                            <div class="page-num">250</div>
+                        </div>
+                        <button class="btn-page">Berikutnya →</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</body>
+</html>

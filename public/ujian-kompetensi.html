@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengajuan Ujian Kompetensi - Admin BKN</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="jabatan.css">
+    <link rel="stylesheet" href="jabatan-detail.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>BKN Admin</h2>
+                <p>Pengelolaan Jabatan ASN</p>
+            </div>
+            <nav class="nav-menu">
+                <a href="dashboard.html" class="nav-item">
+                    <span class="icon">📊</span>
+                    Dashboard
+                </a>
+                <a href="jabatan.html" class="nav-item">
+                    <span class="icon">💼</span>
+                    Jabatan
+                </a>
+                <a href="ujian-kompetensi.html" class="nav-item active">
+                    <span class="icon">📝</span>
+                    Ujian Kompetensi
+                </a>
+                <a href="asn.html" class="nav-item">
+                    <span class="icon">👥</span>
+                    ASN
+                </a>
+                <a href="laporan.html" class="nav-item">
+                    <span class="icon">📈</span>
+                    Laporan
+                </a>
+                <a href="pengaturan.html" class="nav-item">
+                    <span class="icon">⚙️</span>
+                    Pengaturan
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div>
+                    <h1>Pengajuan Ujian Kompetensi</h1>
+                    <p class="breadcrumb">Dashboard > Ujian Kompetensi > Detail Pengajuan</p>
+                </div>
+                <div class="user-info">
+                    <span>Admin BKN</span>
+                    <div class="avatar">A</div>
+                </div>
+            </header>
+
+            <!-- Action Bar -->
+            <section class="action-bar">
+                <button class="btn-primary" onclick="openPengajuanModal()">
+                    <span class="btn-icon">➕</span>
+                    Ajukan Ujian Kompetensi Baru
+                </button>
+                <div class="action-group">
+                    <button class="btn-secondary" onclick="exportData()">
+                        <span class="btn-icon">📥</span>
+                        Export Data
+                    </button>
+                </div>
+            </section>
+
+            <!-- Summary Cards -->
+            <section class="summary-section">
+                <div class="summary-card">
+                    <div class="summary-icon" style="background: rgba(52, 152, 219, 0.1); color: #3498db;">📝</div>
+                    <div>
+                        <h3>Total Pengajuan</h3>
+                        <p class="summary-number" id="totalPengajuan">156</p>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-icon" style="background: rgba(241, 196, 15, 0.1); color: #f39c12;">⏳</div>
+                    <div>
+                        <h3>Menunggu Verifikasi</h3>
+                        <p class="summary-number" id="menungguVerifikasi">42</p>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-icon" style="background: rgba(155, 89, 182, 0.1); color: #9b59b6;">📋</div>
+                    <div>
+                        <h3>Sedang Berlangsung</h3>
+                        <p class="summary-number" id="sedangBerlangsung">52</p>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-icon" style="background: rgba(46, 204, 113, 0.1); color: #27ae60;">✅</div>
+                    <div>
+                        <h3>Selesai</h3>
+                        <p class="summary-number" id="selesai">27</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Charts Section -->
+            <section class="charts-section">
+                <div class="chart-card chart-card-large">
+                    <div class="chart-header">
+                        <h2>Progress Pengajuan per Status</h2>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="progressChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h2>Distribusi Jabatan yang Diajukan</h2>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="jabatanPieChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h2>Hasil Ujian</h2>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="hasilChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Progress Detail -->
+            <section class="progress-section">
+                <div class="section-card">
+                    <h2>Detail Progress Pengajuan</h2>
+                    <div class="progress-container">
+                        <div class="progress-item">
+                            <div class="progress-label">
+                                <span>📋 Pendaftaran</span>
+                                <span><strong id="progPendaftaran">35</strong> peserta</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="barPendaftaran" style="background: linear-gradient(90deg, #3498db, #2980b9);"></div>
+                            </div>
+                            <p style="font-size: 12px; color: #7f8c8d; margin-top: 5px;">Menunggu kelengkapan dokumen</p>
+                        </div>
+                        <div class="progress-item">
+                            <div class="progress-label">
+                                <span>🔍 Verifikasi Dokumen</span>
+                                <span><strong id="progVerifikasi">42</strong> peserta</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="barVerifikasi" style="background: linear-gradient(90deg, #f39c12, #e67e22);"></div>
+                            </div>
+                            <p style="font-size: 12px; color: #7f8c8d; margin-top: 5px;">Sedang dalam proses verifikasi tim</p>
+                        </div>
+                        <div class="progress-item">
+                            <div class="progress-label">
+                                <span>✍️ Sedang Ujian</span>
+                                <span><strong id="progUjian">28</strong> peserta</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="barUjian" style="background: linear-gradient(90deg, #9b59b6, #8e44ad);"></div>
+                            </div>
+                            <p style="font-size: 12px; color: #7f8c8d; margin-top: 5px;">Mengikuti ujian kompetensi</p>
+                        </div>
+                        <div class="progress-item">
+                            <div class="progress-label">
+                                <span>📊 Penilaian</span>
+                                <span><strong id="progPenilaian">24</strong> peserta</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="barPenilaian" style="background: linear-gradient(90deg, #e67e22, #d35400);"></div>
+                            </div>
+                            <p style="font-size: 12px; color: #7f8c8d; margin-top: 5px;">Tim penilai sedang melakukan evaluasi</p>
+                        </div>
+                        <div class="progress-item">
+                            <div class="progress-label">
+                                <span>🎓 Selesai</span>
+                                <span><strong id="progSelesai">27</strong> peserta</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="barSelesai" style="background: linear-gradient(90deg, #27ae60, #229954);"></div>
+                            </div>
+                            <p style="font-size: 12px; color: #7f8c8d; margin-top: 5px;">Hasil telah diumumkan</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Table Section -->
+            <section class="table-section">
+                <div class="table-card">
+                    <div class="table-header">
+                        <h2>Daftar Pengajuan Ujian Kompetensi</h2>
+                        <div class="table-actions">
+                            <select id="filterStatus" class="filter-select" onchange="filterByStatus()">
+                                <option value="all">Semua Status</option>
+                                <option value="Pendaftaran">Pendaftaran</option>
+                                <option value="Verifikasi">Verifikasi Dokumen</option>
+                                <option value="Ujian">Sedang Ujian</option>
+                                <option value="Penilaian">Penilaian</option>
+                                <option value="Selesai">Selesai</option>
+                            </select>
+                            <input type="text" id="searchInput" placeholder="Cari nama/jabatan..." class="search-input">
+                            <button class="btn-export" onclick="exportData()">📥 Export</button>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table" id="ujianTable">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama Peserta</th>
+                                    <th>NIP</th>
+                                    <th>Jabatan Tujuan</th>
+                                    <th>Tanggal Daftar</th>
+                                    <th>Status</th>
+                                    <th>Skor</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody">
+                                <!-- Data will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="table-pagination">
+                        <button class="btn-page" onclick="prevPage()">← Sebelumnya</button>
+                        <span id="pageInfo">Halaman 1 dari 10</span>
+                        <button class="btn-page" onclick="nextPage()">Berikutnya →</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal Pengajuan Ujian Kompetensi Multi-Step -->
+    <div class="modal" id="pengajuanModal">
+        <div class="modal-content" style="max-width: 800px; max-height: 90vh; display: flex; flex-direction: column;">
+            <div class="modal-header">
+                <h2 id="modalTitle">Pengajuan Ujian Kompetensi</h2>
+                <button class="modal-close" onclick="closePengajuanModal()">&times;</button>
+            </div>
+
+            <!-- Progress Stepper -->
+            <div class="stepper-container" style="flex-shrink: 0;">
+                <div class="stepper-item active" data-step="1">
+                    <div class="stepper-circle">1</div>
+                    <div class="stepper-label">Data Peserta</div>
+                </div>
+                <div class="stepper-line"></div>
+                <div class="stepper-item" data-step="2">
+                    <div class="stepper-circle">2</div>
+                    <div class="stepper-label">Jabatan & Dokumen</div>
+                </div>
+                <div class="stepper-line"></div>
+                <div class="stepper-item" data-step="3">
+                    <div class="stepper-circle">3</div>
+                    <div class="stepper-label">Verifikasi</div>
+                </div>
+            </div>
+
+            <div class="modal-body" style="flex: 1; overflow-y: auto; padding: 25px 30px;">
+                <!-- Step 1: Data Peserta -->
+                <div class="form-step active" id="step1">
+                    <h3 style="margin-bottom: 20px; color: #1e3c72;">📋 Data Peserta</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>NIP <span class="required">*</span></label>
+                            <input type="text" id="nip" class="form-input" placeholder="Masukkan NIP" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Nama Lengkap <span class="required">*</span></label>
+                            <input type="text" id="namaLengkap" class="form-input" placeholder="Nama lengkap peserta" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Email <span class="required">*</span></label>
+                            <input type="email" id="email" class="form-input" placeholder="email@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label>No. Telepon <span class="required">*</span></label>
+                            <input type="tel" id="telepon" class="form-input" placeholder="08xxxxxxxxxx" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Jabatan Saat Ini <span class="required">*</span></label>
+                            <input type="text" id="jabatanSekarang" class="form-input" placeholder="Jabatan saat ini" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Unit Kerja <span class="required">*</span></label>
+                            <select id="unitKerja" class="form-input" required>
+                                <option value="">Pilih Unit Kerja</option>
+                                <option value="BKN Pusat">BKN Pusat</option>
+                                <option value="BKN Regional I">BKN Regional I</option>
+                                <option value="BKN Regional II">BKN Regional II</option>
+                                <option value="BKN Regional III">BKN Regional III</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Jabatan & Dokumen -->
+                <div class="form-step" id="step2">
+                    <h3 style="margin-bottom: 20px; color: #1e3c72;">💼 Jabatan Tujuan & Dokumen</h3>
+                    <div class="form-group">
+                        <label>Jabatan yang Diajukan <span class="required">*</span></label>
+                        <select id="jabatanTujuan" class="form-input" required>
+                            <option value="">Pilih Jabatan Tujuan</option>
+                            <option value="Pranata Komputer">Pranata Komputer</option>
+                            <option value="Analis SDM Aparatur">Analis SDM Aparatur</option>
+                            <option value="Analis Kepegawaian">Analis Kepegawaian</option>
+                            <option value="Analis Kebijakan">Analis Kebijakan</option>
+                            <option value="Auditor">Auditor</option>
+                            <option value="Kepala Seksi Kepegawaian">Kepala Seksi Kepegawaian</option>
+                            <option value="Kepala Bidang Mutasi">Kepala Bidang Mutasi</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Kategori Jabatan</label>
+                        <select id="kategoriJabatan" class="form-input" required>
+                            <option value="">Pilih Kategori</option>
+                            <option value="Fungsional">Fungsional</option>
+                            <option value="Struktural">Struktural</option>
+                        </select>
+                    </div>
+
+                    <h4 style="margin: 25px 0 15px; color: #1e3c72;">📎 Upload Dokumen</h4>
+                    <div class="form-group">
+                        <label>SK Jabatan Terakhir <span class="required">*</span></label>
+                        <input type="file" id="skJabatan" class="form-input" accept=".pdf,.jpg,.png" required>
+                        <small style="color: #7f8c8d;">Format: PDF, JPG, PNG (Max 2MB)</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Ijazah Terakhir <span class="required">*</span></label>
+                        <input type="file" id="ijazah" class="form-input" accept=".pdf,.jpg,.png" required>
+                        <small style="color: #7f8c8d;">Format: PDF, JPG, PNG (Max 2MB)</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Sertifikat Kompetensi (Jika Ada)</label>
+                        <input type="file" id="sertifikat" class="form-input" accept=".pdf,.jpg,.png">
+                        <small style="color: #7f8c8d;">Format: PDF, JPG, PNG (Max 2MB)</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Dokumen Pendukung Lainnya</label>
+                        <input type="file" id="dokumenLain" class="form-input" accept=".pdf,.jpg,.png" multiple>
+                        <small style="color: #7f8c8d;">Dapat upload multiple files</small>
+                    </div>
+                </div>
+
+                <!-- Step 3: Verifikasi -->
+                <div class="form-step" id="step3">
+                    <h3 style="margin-bottom: 20px; color: #1e3c72;">✅ Verifikasi Data</h3>
+                    <div class="verification-card">
+                        <h4 style="color: #1e3c72; margin-bottom: 15px;">Data Peserta</h4>
+                        <div class="verification-row">
+                            <span class="verification-label">NIP:</span>
+                            <span class="verification-value" id="verify-nip">-</span>
+                        </div>
+                        <div class="verification-row">
+                            <span class="verification-label">Nama:</span>
+                            <span class="verification-value" id="verify-nama">-</span>
+                        </div>
+                        <div class="verification-row">
+                            <span class="verification-label">Email:</span>
+                            <span class="verification-value" id="verify-email">-</span>
+                        </div>
+                        <div class="verification-row">
+                            <span class="verification-label">No. Telepon:</span>
+                            <span class="verification-value" id="verify-telepon">-</span>
+                        </div>
+                        <div class="verification-row">
+                            <span class="verification-label">Jabatan Saat Ini:</span>
+                            <span class="verification-value" id="verify-jabatan-sekarang">-</span>
+                        </div>
+                        <div class="verification-row">
+                            <span class="verification-label">Unit Kerja:</span>
+                            <span class="verification-value" id="verify-unit">-</span>
+                        </div>
+                    </div>
+
+                    <div class="verification-card" style="margin-top: 20px;">
+                        <h4 style="color: #1e3c72; margin-bottom: 15px;">Jabatan & Dokumen</h4>
+                        <div class="verification-row">
+                            <span class="verification-label">Jabatan yang Diajukan:</span>
+                            <span class="verification-value" id="verify-jabatan-tujuan">-</span>
+                        </div>
+                        <div class="verification-row">
+                            <span class="verification-label">Kategori:</span>
+                            <span class="verification-value" id="verify-kategori">-</span>
+                        </div>
+                        <div class="verification-row">
+                            <span class="verification-label">SK Jabatan:</span>
+                            <span class="verification-value" id="verify-sk">-</span>
+                        </div>
+                        <div class="verification-row">
+                            <span class="verification-label">Ijazah:</span>
+                            <span class="verification-value" id="verify-ijazah">-</span>
+                        </div>
+                        <div class="verification-row">
+                            <span class="verification-label">Sertifikat:</span>
+                            <span class="verification-value" id="verify-sertifikat">-</span>
+                        </div>
+                    </div>
+
+                    <div class="alert-info" style="margin-top: 20px; padding: 15px; background: #e3f2fd; border-left: 4px solid #2196F3; border-radius: 4px;">
+                        <strong>ℹ️ Informasi:</strong>
+                        <p style="margin-top: 5px; color: #555;">Setelah pengajuan disubmit, data akan masuk ke tahap <strong>Verifikasi Dokumen</strong>. Tim verifikator akan meninjau kelengkapan dan keabsahan dokumen dalam 2-3 hari kerja.</p>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 20px;">
+                        <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                            <input type="checkbox" id="pernyataan" required>
+                            <span>Saya menyatakan bahwa data yang diisikan adalah benar dan dapat dipertanggungjawabkan</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer" style="flex-shrink: 0;">
+                <button class="btn-secondary" id="btnPrev" onclick="prevStep()" style="display: none;">← Sebelumnya</button>
+                <button class="btn-secondary" onclick="closePengajuanModal()">Batal</button>
+                <button class="btn-primary" id="btnNext" onclick="nextStep()">Selanjutnya →</button>
+                <button class="btn-primary" id="btnSubmit" onclick="submitPengajuan()" style="display: none;">✓ Submit Pengajuan</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Detail Verifikasi -->
+    <div class="modal" id="verifikasiModal">
+        <div class="modal-content" style="max-width: 700px;">
+            <div class="modal-header">
+                <h2>Verifikasi Pengajuan</h2>
+                <button class="modal-close" onclick="closeVerifikasiModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="verification-detail-card">
+                    <h3 id="verif-nama-peserta" style="color: #1e3c72; margin-bottom: 10px;">-</h3>
+                    <p style="color: #7f8c8d; margin-bottom: 20px;">NIP: <span id="verif-nip">-</span></p>
+
+                    <div class="verification-row">
+                        <span class="verification-label">Jabatan Tujuan:</span>
+                        <span class="verification-value" id="verif-jabatan">-</span>
+                    </div>
+                    <div class="verification-row">
+                        <span class="verification-label">Tanggal Daftar:</span>
+                        <span class="verification-value" id="verif-tanggal">-</span>
+                    </div>
+                    <div class="verification-row">
+                        <span class="verification-label">Status Saat Ini:</span>
+                        <span class="verification-value" id="verif-status-current">-</span>
+                    </div>
+                </div>
+
+                <div style="margin-top: 25px;">
+                    <h4 style="color: #1e3c72; margin-bottom: 15px;">Aksi Verifikasi</h4>
+                    <div class="form-group">
+                        <label>Pilih Status Selanjutnya <span class="required">*</span></label>
+                        <select id="statusBaru" class="form-input">
+                            <option value="">Pilih Status</option>
+                            <option value="Verifikasi">Lolos Verifikasi (Lanjut ke Ujian)</option>
+                            <option value="Ujian">Sedang Ujian</option>
+                            <option value="Penilaian">Lanjut ke Penilaian</option>
+                            <option value="Selesai">Selesai (Lulus)</option>
+                            <option value="Ditolak">Ditolak</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Catatan Verifikasi</label>
+                        <textarea id="catatanVerifikasi" class="form-input" rows="4" placeholder="Tambahkan catatan untuk peserta..."></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeVerifikasiModal()">Batal</button>
+                <button class="btn-primary" onclick="prosesVerifikasi()">✓ Proses Verifikasi</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="ujian-kompetensi.js"></script>
+</body>
+</html>

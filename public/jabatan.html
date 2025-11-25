@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengelolaan Jabatan - Admin BKN</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="jabatan-detail.css">
+    <link rel="stylesheet" href="jabatan.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>BKN Admin</h2>
+                <p>Pengelolaan Jabatan ASN</p>
+            </div>
+            <nav class="nav-menu">
+                <a href="dashboard.html" class="nav-item">
+                    <span class="icon">📊</span>
+                    Dashboard
+                </a>
+                <a href="jabatan.html" class="nav-item active">
+                    <span class="icon">💼</span>
+                    Jabatan
+                </a>
+                <a href="ujian-kompetensi.html" class="nav-item">
+                    <span class="icon">📝</span>
+                    Ujian Kompetensi
+                </a>
+                <a href="asn.html" class="nav-item">
+                    <span class="icon">👥</span>
+                    ASN
+                </a>
+                <a href="laporan.html" class="nav-item">
+                    <span class="icon">📈</span>
+                    Laporan
+                </a>
+                <a href="pengaturan.html" class="nav-item">
+                    <span class="icon">⚙️</span>
+                    Pengaturan
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div>
+                    <h1>Pengelolaan Jabatan</h1>
+                    <p class="breadcrumb">Dashboard > Jabatan</p>
+                </div>
+                <div class="user-info">
+                    <span>Admin BKN</span>
+                    <div class="avatar">A</div>
+                </div>
+            </header>
+
+            <!-- Action Bar -->
+            <section class="action-bar">
+                <button class="btn-primary" onclick="openAddModal()">
+                    <span class="btn-icon">➕</span>
+                    Tambah Jabatan Baru
+                </button>
+                <div class="action-group">
+                    <button class="btn-secondary" onclick="exportData()">
+                        <span class="btn-icon">📥</span>
+                        Export Excel
+                    </button>
+                    <button class="btn-secondary" onclick="printData()">
+                        <span class="btn-icon">🖨️</span>
+                        Print
+                    </button>
+                </div>
+            </section>
+
+            <!-- Summary Cards -->
+            <section class="summary-section">
+                <div class="summary-card-mini">
+                    <div class="summary-card-mini-icon" style="background: rgba(52, 152, 219, 0.1); color: #3498db;">📋</div>
+                    <div>
+                        <h3>Total Jabatan</h3>
+                        <p class="summary-number-mini" id="totalJabatanCount">18</p>
+                    </div>
+                </div>
+                <div class="summary-card-mini">
+                    <div class="summary-card-mini-icon" style="background: rgba(46, 204, 113, 0.1); color: #27ae60;">✅</div>
+                    <div>
+                        <h3>Jabatan Aktif</h3>
+                        <p class="summary-number-mini" id="jabatanAktif">15</p>
+                    </div>
+                </div>
+                <div class="summary-card-mini">
+                    <div class="summary-card-mini-icon" style="background: rgba(241, 196, 15, 0.1); color: #f39c12;">⏸️</div>
+                    <div>
+                        <h3>Non-Aktif</h3>
+                        <p class="summary-number-mini" id="jabatanNonAktif">3</p>
+                    </div>
+                </div>
+                <div class="summary-card-mini">
+                    <div class="summary-card-mini-icon" style="background: rgba(155, 89, 182, 0.1); color: #9b59b6;">🎯</div>
+                    <div>
+                        <h3>Kategori</h3>
+                        <p class="summary-number-mini">3</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Filter & Search -->
+            <section class="filter-search-section">
+                <div class="filter-search-card">
+                    <div class="search-box">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" id="searchJabatan" placeholder="Cari nama jabatan..." class="search-input-main">
+                    </div>
+                    <div class="filter-group-inline">
+                        <select id="filterKategori" class="filter-select" onchange="applyFilters()">
+                            <option value="all">Semua Kategori</option>
+                            <option value="Fungsional">Fungsional</option>
+                            <option value="Struktural">Struktural</option>
+                            <option value="Pelaksana">Pelaksana</option>
+                        </select>
+                        <select id="filterStatus" class="filter-select" onchange="applyFilters()">
+                            <option value="all">Semua Status</option>
+                            <option value="aktif">Aktif</option>
+                            <option value="non-aktif">Non-Aktif</option>
+                        </select>
+                        <button class="btn-filter-reset" onclick="resetFilters()">Reset Filter</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Jabatan Grid/List -->
+            <section class="jabatan-list-section">
+                <div class="section-header">
+                    <h2>Daftar Jabatan</h2>
+                    <div class="view-toggle">
+                        <button class="view-btn active" onclick="switchView('grid')" id="btnGrid">
+                            <span>⊞</span> Grid
+                        </button>
+                        <button class="view-btn" onclick="switchView('list')" id="btnList">
+                            <span>☰</span> List
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Grid View -->
+                <div class="jabatan-grid" id="jabatanGrid">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+
+                <!-- List View (Hidden by default) -->
+                <div class="jabatan-table-view" id="jabatanList" style="display: none;">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Jabatan</th>
+                                <th>Kategori</th>
+                                <th>Dibutuhkan</th>
+                                <th>Terisi</th>
+                                <th>Kosong</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="jabatanTableBody">
+                            <!-- Will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination-section">
+                    <div class="pagination-info">
+                        Menampilkan <strong id="showingStart">1</strong> - <strong id="showingEnd">9</strong> dari <strong id="totalItems">18</strong> jabatan
+                    </div>
+                    <div class="pagination-controls">
+                        <button class="btn-page" onclick="prevPage()">← Sebelumnya</button>
+                        <div class="page-numbers" id="pageNumbers"></div>
+                        <button class="btn-page" onclick="nextPage()">Berikutnya →</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal Add/Edit Jabatan -->
+    <div class="modal" id="jabatanModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Tambah Jabatan Baru</h2>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="jabatanForm">
+                    <div class="form-group">
+                        <label>Nama Jabatan <span class="required">*</span></label>
+                        <input type="text" id="namaJabatan" class="form-input" placeholder="Contoh: Pranata Komputer" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Kategori <span class="required">*</span></label>
+                            <select id="kategoriJabatan" class="form-input" required>
+                                <option value="">Pilih Kategori</option>
+                                <option value="Fungsional">Fungsional</option>
+                                <option value="Struktural">Struktural</option>
+                                <option value="Pelaksana">Pelaksana</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Status <span class="required">*</span></label>
+                            <select id="statusJabatan" class="form-input" required>
+                                <option value="aktif">Aktif</option>
+                                <option value="non-aktif">Non-Aktif</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Jumlah Dibutuhkan <span class="required">*</span></label>
+                            <input type="number" id="jumlahDibutuhkan" class="form-input" min="1" placeholder="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Jumlah Terisi</label>
+                            <input type="number" id="jumlahTerisi" class="form-input" min="0" placeholder="0">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Deskripsi</label>
+                        <textarea id="deskripsiJabatan" class="form-input" rows="3" placeholder="Deskripsi singkat tentang jabatan..."></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeModal()">Batal</button>
+                <button class="btn-primary" onclick="saveJabatan()">Simpan</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="jabatan.js"></script>
+</body>
+</html>

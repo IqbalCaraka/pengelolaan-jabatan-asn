@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laporan - Admin BKN</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="jabatan.css">
+    <link rel="stylesheet" href="jabatan-detail.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>BKN Admin</h2>
+                <p>Pengelolaan Jabatan ASN</p>
+            </div>
+            <nav class="nav-menu">
+                <a href="dashboard.html" class="nav-item">
+                    <span class="icon">📊</span>
+                    Dashboard
+                </a>
+                <a href="jabatan.html" class="nav-item">
+                    <span class="icon">💼</span>
+                    Jabatan
+                </a>
+                <a href="ujian-kompetensi.html" class="nav-item">
+                    <span class="icon">📝</span>
+                    Ujian Kompetensi
+                </a>
+                <a href="asn.html" class="nav-item">
+                    <span class="icon">👥</span>
+                    ASN
+                </a>
+                <a href="laporan.html" class="nav-item active">
+                    <span class="icon">📈</span>
+                    Laporan
+                </a>
+                <a href="pengaturan.html" class="nav-item">
+                    <span class="icon">⚙️</span>
+                    Pengaturan
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="header">
+                <div>
+                    <h1>Laporan & Statistik</h1>
+                    <p class="breadcrumb">Dashboard > Laporan</p>
+                </div>
+                <div class="user-info">
+                    <span>Admin BKN</span>
+                    <div class="avatar">A</div>
+                </div>
+            </header>
+
+            <section class="action-bar">
+                <button class="btn-primary" onclick="alert('Generate Laporan')">
+                    <span class="btn-icon">📊</span>
+                    Generate Laporan
+                </button>
+                <div class="action-group">
+                    <button class="btn-secondary" onclick="alert('Export PDF')">
+                        <span class="btn-icon">📄</span>
+                        Export PDF
+                    </button>
+                    <button class="btn-secondary" onclick="alert('Export Excel')">
+                        <span class="btn-icon">📥</span>
+                        Export Excel
+                    </button>
+                </div>
+            </section>
+
+            <section class="summary-section">
+                <div class="summary-card-mini">
+                    <div class="summary-card-mini-icon" style="background: rgba(52, 152, 219, 0.1); color: #3498db;">📊</div>
+                    <div>
+                        <h3>Total Laporan</h3>
+                        <p class="summary-number-mini">247</p>
+                    </div>
+                </div>
+                <div class="summary-card-mini">
+                    <div class="summary-card-mini-icon" style="background: rgba(46, 204, 113, 0.1); color: #27ae60;">✅</div>
+                    <div>
+                        <h3>Bulan Ini</h3>
+                        <p class="summary-number-mini">42</p>
+                    </div>
+                </div>
+                <div class="summary-card-mini">
+                    <div class="summary-card-mini-icon" style="background: rgba(241, 196, 15, 0.1); color: #f39c12;">📈</div>
+                    <div>
+                        <h3>Laporan Aktif</h3>
+                        <p class="summary-number-mini">12</p>
+                    </div>
+                </div>
+                <div class="summary-card-mini">
+                    <div class="summary-card-mini-icon" style="background: rgba(155, 89, 182, 0.1); color: #9b59b6;">⭐</div>
+                    <div>
+                        <h3>Laporan Pending</h3>
+                        <p class="summary-number-mini">8</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="filter-search-section">
+                <div class="filter-search-card">
+                    <div class="search-box">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" id="searchLaporan" placeholder="Cari laporan berdasarkan judul atau kategori..." class="search-input-main">
+                    </div>
+                    <div class="filter-group-inline">
+                        <select class="filter-select">
+                            <option value="all">Semua Kategori</option>
+                            <option value="jabatan">Laporan Jabatan</option>
+                            <option value="asn">Laporan ASN</option>
+                            <option value="ujian">Laporan Ujian</option>
+                            <option value="kinerja">Laporan Kinerja</option>
+                        </select>
+                        <select class="filter-select">
+                            <option value="all">Semua Periode</option>
+                            <option value="harian">Harian</option>
+                            <option value="mingguan">Mingguan</option>
+                            <option value="bulanan">Bulanan</option>
+                            <option value="tahunan">Tahunan</option>
+                        </select>
+                        <button class="btn-filter-reset">Reset Filter</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="jabatan-list-section">
+                <div class="section-header">
+                    <h2>Daftar Laporan</h2>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Judul Laporan</th>
+                                <th>Kategori</th>
+                                <th>Periode</th>
+                                <th>Tanggal Dibuat</th>
+                                <th>Pembuat</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td><strong>Laporan Kebutuhan Jabatan Q4 2025</strong></td>
+                                <td><span class="status-badge" style="background: #3498db;">Jabatan</span></td>
+                                <td>Triwulan 4 2025</td>
+                                <td>24 Nov 2025</td>
+                                <td>Admin BKN</td>
+                                <td><span class="status-badge status-normal">Selesai</span></td>
+                                <td>
+                                    <button class="btn-action" onclick="alert('Lihat Laporan')">Lihat</button>
+                                    <button class="btn-action" onclick="alert('Download')">Download</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td><strong>Statistik Ujian Kompetensi November</strong></td>
+                                <td><span class="status-badge" style="background: #9b59b6;">Ujian</span></td>
+                                <td>November 2025</td>
+                                <td>20 Nov 2025</td>
+                                <td>Operator Ujian</td>
+                                <td><span class="status-badge status-normal">Selesai</span></td>
+                                <td>
+                                    <button class="btn-action" onclick="alert('Lihat Laporan')">Lihat</button>
+                                    <button class="btn-action" onclick="alert('Download')">Download</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td><strong>Rekapitulasi ASN Aktif Per Unit</strong></td>
+                                <td><span class="status-badge" style="background: #27ae60;">ASN</span></td>
+                                <td>November 2025</td>
+                                <td>18 Nov 2025</td>
+                                <td>Admin BKN</td>
+                                <td><span class="status-badge status-warning">Proses</span></td>
+                                <td>
+                                    <button class="btn-action" onclick="alert('Lihat Laporan')">Lihat</button>
+                                    <button class="btn-action" onclick="alert('Download')">Download</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td><strong>Analisis Kinerja ASN Semester 2</strong></td>
+                                <td><span class="status-badge" style="background: #e67e22;">Kinerja</span></td>
+                                <td>Semester 2 2025</td>
+                                <td>15 Nov 2025</td>
+                                <td>Verifikator</td>
+                                <td><span class="status-badge status-normal">Selesai</span></td>
+                                <td>
+                                    <button class="btn-action" onclick="alert('Lihat Laporan')">Lihat</button>
+                                    <button class="btn-action" onclick="alert('Download')">Download</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td><strong>Laporan Mutasi dan Promosi ASN</strong></td>
+                                <td><span class="status-badge" style="background: #27ae60;">ASN</span></td>
+                                <td>Oktober 2025</td>
+                                <td>10 Nov 2025</td>
+                                <td>Admin BKN</td>
+                                <td><span class="status-badge status-normal">Selesai</span></td>
+                                <td>
+                                    <button class="btn-action" onclick="alert('Lihat Laporan')">Lihat</button>
+                                    <button class="btn-action" onclick="alert('Download')">Download</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td><strong>Evaluasi Pengisian Jabatan 2025</strong></td>
+                                <td><span class="status-badge" style="background: #3498db;">Jabatan</span></td>
+                                <td>Tahunan 2025</td>
+                                <td>5 Nov 2025</td>
+                                <td>Operator Jabatan</td>
+                                <td><span class="status-badge status-purple">Pending</span></td>
+                                <td>
+                                    <button class="btn-action" onclick="alert('Lihat Laporan')">Lihat</button>
+                                    <button class="btn-action" onclick="alert('Download')">Download</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="pagination-section">
+                    <div class="pagination-info">
+                        Menampilkan 1-6 dari 247 Laporan
+                    </div>
+                    <div class="pagination-controls">
+                        <button class="btn-page">← Sebelumnya</button>
+                        <div class="page-numbers">
+                            <div class="page-num active">1</div>
+                            <div class="page-num">2</div>
+                            <div class="page-num">3</div>
+                            <div class="page-num">...</div>
+                            <div class="page-num">42</div>
+                        </div>
+                        <button class="btn-page">Berikutnya →</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</body>
+</html>

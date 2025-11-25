@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengaturan - Admin BKN</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="jabatan.css">
+    <link rel="stylesheet" href="jabatan-detail.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>BKN Admin</h2>
+                <p>Pengelolaan Jabatan ASN</p>
+            </div>
+            <nav class="nav-menu">
+                <a href="dashboard.html" class="nav-item">
+                    <span class="icon">📊</span>
+                    Dashboard
+                </a>
+                <a href="jabatan.html" class="nav-item">
+                    <span class="icon">💼</span>
+                    Jabatan
+                </a>
+                <a href="ujian-kompetensi.html" class="nav-item">
+                    <span class="icon">📝</span>
+                    Ujian Kompetensi
+                </a>
+                <a href="asn.html" class="nav-item">
+                    <span class="icon">👥</span>
+                    ASN
+                </a>
+                <a href="laporan.html" class="nav-item">
+                    <span class="icon">📈</span>
+                    Laporan
+                </a>
+                <a href="pengaturan.html" class="nav-item active">
+                    <span class="icon">⚙️</span>
+                    Pengaturan
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="header">
+                <div>
+                    <h1>Pengaturan Sistem</h1>
+                    <p class="breadcrumb">Dashboard > Pengaturan</p>
+                </div>
+                <div class="user-info">
+                    <span>Admin BKN</span>
+                    <div class="avatar">A</div>
+                </div>
+            </header>
+
+            <section class="summary-section">
+                <div class="summary-card-mini">
+                    <div class="summary-card-mini-icon" style="background: rgba(52, 152, 219, 0.1); color: #3498db;">👤</div>
+                    <div>
+                        <h3>Profil Sistem</h3>
+                        <p class="summary-number-mini" style="font-size: 14px;">BKN Admin v1.0</p>
+                    </div>
+                </div>
+                <div class="summary-card-mini">
+                    <div class="summary-card-mini-icon" style="background: rgba(46, 204, 113, 0.1); color: #27ae60;">🔒</div>
+                    <div>
+                        <h3>Keamanan</h3>
+                        <p class="summary-number-mini" style="font-size: 14px;">SSL Aktif</p>
+                    </div>
+                </div>
+                <div class="summary-card-mini">
+                    <div class="summary-card-mini-icon" style="background: rgba(241, 196, 15, 0.1); color: #f39c12;">💾</div>
+                    <div>
+                        <h3>Backup Terakhir</h3>
+                        <p class="summary-number-mini" style="font-size: 14px;">24 Nov 2025</p>
+                    </div>
+                </div>
+                <div class="summary-card-mini">
+                    <div class="summary-card-mini-icon" style="background: rgba(155, 89, 182, 0.1); color: #9b59b6;">👥</div>
+                    <div>
+                        <h3>Total Pengguna</h3>
+                        <p class="summary-number-mini">12</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="jabatan-list-section">
+                <div class="section-header">
+                    <h2>Pengaturan Umum</h2>
+                </div>
+
+                <div class="section-card" style="margin-bottom: 20px;">
+                    <h3 style="margin-bottom: 15px; color: #2c3e50;">Informasi Sistem</h3>
+                    <div style="display: grid; gap: 15px;">
+                        <div style="display: flex; justify-content: space-between; padding: 12px; background: #f8f9fa; border-radius: 8px;">
+                            <span style="color: #7f8c8d;">Nama Aplikasi</span>
+                            <strong>Pengelolaan Jabatan ASN BKN</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 12px; background: #f8f9fa; border-radius: 8px;">
+                            <span style="color: #7f8c8d;">Versi</span>
+                            <strong>1.0.0</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 12px; background: #f8f9fa; border-radius: 8px;">
+                            <span style="color: #7f8c8d;">Tanggal Instalasi</span>
+                            <strong>1 Januari 2025</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 12px; background: #f8f9fa; border-radius: 8px;">
+                            <span style="color: #7f8c8d;">Administrator</span>
+                            <strong>Admin BKN</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-card" style="margin-bottom: 20px;">
+                    <h3 style="margin-bottom: 15px; color: #2c3e50;">Manajemen Pengguna</h3>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama</th>
+                                    <th>Username</th>
+                                    <th>Role</th>
+                                    <th>Status</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td><strong>Admin BKN</strong></td>
+                                    <td>admin_bkn</td>
+                                    <td><span class="status-badge status-urgent">Super Admin</span></td>
+                                    <td><span class="status-badge status-normal">Aktif</span></td>
+                                    <td><button class="btn-action" onclick="alert('Edit User')">Edit</button></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td><strong>Operator Jabatan</strong></td>
+                                    <td>operator_jabatan</td>
+                                    <td><span class="status-badge status-warning">Operator</span></td>
+                                    <td><span class="status-badge status-normal">Aktif</span></td>
+                                    <td><button class="btn-action" onclick="alert('Edit User')">Edit</button></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td><strong>Verifikator Ujian</strong></td>
+                                    <td>verifikator_ujian</td>
+                                    <td><span class="status-badge status-purple">Verifikator</span></td>
+                                    <td><span class="status-badge status-normal">Aktif</span></td>
+                                    <td><button class="btn-action" onclick="alert('Edit User')">Edit</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section-card">
+                    <h3 style="margin-bottom: 15px; color: #2c3e50;">Pengaturan Keamanan</h3>
+                    <div style="display: grid; gap: 15px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: #f8f9fa; border-radius: 8px;">
+                            <div>
+                                <strong>Two-Factor Authentication</strong>
+                                <p style="font-size: 12px; color: #7f8c8d; margin-top: 4px;">Keamanan tambahan dengan OTP</p>
+                            </div>
+                            <label style="position: relative; display: inline-block; width: 50px; height: 24px;">
+                                <input type="checkbox" checked style="opacity: 0; width: 0; height: 0;">
+                                <span style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #27ae60; transition: .4s; border-radius: 24px;"></span>
+                            </label>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: #f8f9fa; border-radius: 8px;">
+                            <div>
+                                <strong>Auto Backup</strong>
+                                <p style="font-size: 12px; color: #7f8c8d; margin-top: 4px;">Backup otomatis setiap hari</p>
+                            </div>
+                            <label style="position: relative; display: inline-block; width: 50px; height: 24px;">
+                                <input type="checkbox" checked style="opacity: 0; width: 0; height: 0;">
+                                <span style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #27ae60; transition: .4s; border-radius: 24px;"></span>
+                            </label>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: #f8f9fa; border-radius: 8px;">
+                            <div>
+                                <strong>Email Notifikasi</strong>
+                                <p style="font-size: 12px; color: #7f8c8d; margin-top: 4px;">Notifikasi perubahan penting</p>
+                            </div>
+                            <label style="position: relative; display: inline-block; width: 50px; height: 24px;">
+                                <input type="checkbox" style="opacity: 0; width: 0; height: 0;">
+                                <span style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #95a5a6; transition: .4s; border-radius: 24px;"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</body>
+</html>
